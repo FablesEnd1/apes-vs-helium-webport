@@ -1,25 +1,106 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Apes vs Helium</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-    <script src="TemplateData/UnityProgress.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/webglboii.json", {onProgress: UnityProgress});
-    </script>
-  </head>
-  <body>
-    <div class="webgl-content">
-      <div id="unityContainer" style="width: 960px; height: 600px"></div>
-      <div class="footer">
-        <div class="webgl-logo"></div>
-        <div class="fullscreen" onclick="unityInstance.SetFullscreen(1)"></div>
-        <div class="title">Apes vs Helium</div>
-      </div>
-    </div>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>Apes vs Helium</title>
+
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #231F20;
+    }
+
+    .webgl-content {
+      position: fixed !important;
+      top: 0 !important;
+      left: 0 !important;
+      transform: none !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    #unityContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw !important;
+      height: 100vh !important;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    #unityContainer canvas {
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+    }
+
+    .webgl-content .logo,
+    .webgl-content .progress {
+      z-index: 5;
+    }
+
+    #fullscreenButton {
+      position: fixed;
+      right: 12px;
+      top: 12px;
+      z-index: 20;
+      padding: 9px 14px;
+      color: white;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    #fullscreenButton:hover {
+      background: rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="webgl-content">
+    <div id="unityContainer"></div>
+  </div>
+
+  <button id="fullscreenButton" onclick="goFullscreen()">
+    Fullscreen
+  </button>
+
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+
+  <script>
+    (function () {
+      window.unityInstance = UnityLoader.instantiate(
+        "unityContainer",
+        "Build/webglboii.json",
+        {
+          onProgress: UnityProgress
+        }
+      );
+    })();
+
+    function goFullscreen() {
+      if (window.unityInstance) {
+        window.unityInstance.SetFullscreen(1);
+      }
+    }
+  </script>
+</body>
 </html>
